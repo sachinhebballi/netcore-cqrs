@@ -2,13 +2,8 @@
 
 namespace Api.Models.Domain
 {
-    public partial class Employee
+    public partial class Employee : DomainBase
     {
-        public Employee()
-        {
-
-        }
-
         public int EmployeeId { get; set; }
 
         public int AddressId { get; set; }
@@ -19,11 +14,6 @@ namespace Api.Models.Domain
 
         public int Age { get; set; }
 
-        public string ModifiedBy { get; set; }
-
-        public DateTime ModifiedDate { get; set; }
-
         public virtual Address Address { get; set; }
-
     }
 }

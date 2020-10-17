@@ -1,5 +1,5 @@
 ﻿using Domain = Api.Models.Domain;
-using Request = Api.Models.Request;
+using Request = Api.Models.Models;
 using AutoMapper;
 using System.Collections.Generic;
 

@@ -1,4 +1,4 @@
-﻿using Api.Models.Request;
+﻿using Api.Models.Models;
 using MediatR;
 using System.Collections.Generic;
 

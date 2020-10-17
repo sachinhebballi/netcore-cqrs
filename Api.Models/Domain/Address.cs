@@ -1,14 +1,7 @@
-﻿using System;
-
-namespace Api.Models.Domain
+﻿namespace Api.Models.Domain
 {
-    public partial class Address
+    public partial class Address : DomainBase
     {
-        public Address()
-        {
-
-        }
-
         public int AddressId { get; set; }
 
         public string UnitNumber { get; set; }
@@ -23,11 +16,6 @@ namespace Api.Models.Domain
 
         public int Postcode { get; set; }
 
-        public string ModifiedBy { get; set; }
-
-        public DateTime ModifiedDate { get; set; }
-
         public virtual Employee Employee { get; set; }
-
     }
 }

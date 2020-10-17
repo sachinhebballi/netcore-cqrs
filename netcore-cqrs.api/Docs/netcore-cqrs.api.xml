@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>netcore-cqrs.api</name>
+    </assembly>
+    <members>
+        <member name="T:netcore_cqrs.api.Controllers.EmployeesController">
+            <summary>
+            Api controller for employees
+            </summary>
+        </member>
+        <member name="M:netcore_cqrs.api.Controllers.EmployeesController.#ctor(MediatR.IMediator,Serilog.ILogger)">
+            <summary>
+            Initializes a new instance of <see cref="T:netcore_cqrs.api.Controllers.EmployeesController"/> class
+            </summary>
+            <param name="mediator">Mediator</param>
+            <param name="logger">Serilog logger instance</param>
+        </member>
+        <member name="M:netcore_cqrs.api.Controllers.EmployeesController.GetEmployees(System.Int32,System.Int32)">
+            <summary>
+            Gets all the employees
+            </summary>
+            <param name="pageNumber">Page number</param>
+            <param name="pageSize">Page size</param>
+            <returns>Returns the list of employees</returns>
+        </member>
+        <member name="M:netcore_cqrs.api.Controllers.EmployeesController.GetEmployee(System.Int32)">
+            <summary>
+            Gets the employee by id
+            </summary>
+            <param name="id">Id of the employee</param>
+            <returns>Returns employee</returns>
+        </member>
+        <member name="M:netcore_cqrs.api.Controllers.EmployeesController.AddEmployee(Api.Models.Models.Employee)">
+            <summary>
+            Adds a new employee
+            </summary>
+            <param name="employee">Employee model</param>
+            <returns></returns>
+        </member>
+        <member name="T:netcore_cqrs.api.Examples.EmployeeExample">
+            <summary>
+            Swagger document example for employee model
+            </summary>
+        </member>
+        <member name="M:netcore_cqrs.api.Examples.EmployeeExample.GetExamples">
+            <summary>
+            Example object for employee
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:netcore_cqrs.api.Examples.EmployeesExample">
+            <summary>
+            Swagger document example for employee model
+            </summary>
+        </member>
+        <member name="M:netcore_cqrs.api.Examples.EmployeesExample.GetExamples">
+            <summary>
+            Example object for employees
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

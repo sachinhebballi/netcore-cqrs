@@ -4,9 +4,9 @@ using Request = Api.Models.Models;
 
 namespace Api.Application.Command.AddEmployee
 {
-    public class AddEmployeeCommandValidator : AbstractValidator<Request.Employee>
+    public class UpdateEmployeeCommandValidator : AbstractValidator<Request.Employee>
     {
-        public AddEmployeeCommandValidator()
+        public UpdateEmployeeCommandValidator()
         {
             RuleFor(employee => employee)
                 .SetValidator(new EmployeeValidator())

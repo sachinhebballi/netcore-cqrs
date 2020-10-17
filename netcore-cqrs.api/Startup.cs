@@ -1,6 +1,7 @@
 using Api.Persistence;
 using Api.Repository;
 using AutoMapper;
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
+using System.IO;
 using System.Text.Json;
 
 namespace netcore_cqrs.api
@@ -33,16 +35,44 @@ namespace netcore_cqrs.api
                 options.UseInMemoryDatabase("Employees");
             });
 
-            services.AddSwaggerGen(swag =>
-            {
-                swag.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "1.0" });
+            services.AddSwaggerGen(c =>
+            {   
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "1.0" });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            },
+                            Scheme = "oauth2",
+                            Name = "Bearer",
+                            In = ParameterLocation.Header
+                        },
+                        new[] { "readAccess", "writeAccess" }
+                    }
+                });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "Jwt authorization using bearer scheme",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+                });
+
+                c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, @"Docs\netcore-cqrs.api.xml"));
             });
             
             var assembly = AppDomain.CurrentDomain.Load("Api.Application");
 
             services
                 .AddMvc()
-                //.AddFluentValidation(v => v.RegisterValidatorsFromAssembly(assembly))
+                .AddFluentValidation(v => v.RegisterValidatorsFromAssembly(assembly))
                 .AddJsonOptions(opts =>
                 {
                     opts.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;

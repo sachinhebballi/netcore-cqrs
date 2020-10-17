@@ -1,4 +1,4 @@
-﻿namespace Api.Models.Request
+﻿namespace Api.Models.Models
 {
     public class Address
     {

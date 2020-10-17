@@ -34,14 +34,20 @@ namespace Api.Repository
             throw new NotImplementedException();
         }
 
-        public Task<Employee> GetEmployeeAsync(int id, CancellationToken cancellationToken)
+        public async Task<Employee> GetEmployeeAsync(int id, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return await _context.Employees
+                .Include(_ => _.Address)
+                .FirstOrDefaultAsync(_ => _.EmployeeId == id, cancellationToken);
         }
 
         public async Task<IEnumerable<Employee>> GetEmployeesAsync(int page, int pageSize, CancellationToken cancellationToken)
         {
-            return await _context.Employees.Skip(pageSize * (page - 1)).Take(pageSize).ToListAsync(cancellationToken);
+            return await _context.Employees
+                .Include(_ => _.Address)
+                .Skip(pageSize * (page - 1))
+                .Take(pageSize)
+                .ToListAsync(cancellationToken);
         }
 
         public Task UpdateAsync(Employee employee, CancellationToken cancellationToken)

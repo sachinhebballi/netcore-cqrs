@@ -1,4 +1,4 @@
-﻿namespace Api.Models.Request
+﻿namespace Api.Models.Models
 {
     public class Employee
     {
@@ -9,5 +9,7 @@
         public string LastName { get; set; }
 
         public int Age { get; set; }
+
+        public Address Address { get; set; }
     }
 }

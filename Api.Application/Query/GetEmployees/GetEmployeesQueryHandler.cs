@@ -4,7 +4,7 @@ using MediatR;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Request = Api.Models.Request;
+using Request = Api.Models.Models;
 
 namespace Api.Application.Query.GetEmployees
 {
