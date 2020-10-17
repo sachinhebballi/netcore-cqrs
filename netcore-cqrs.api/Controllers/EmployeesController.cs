@@ -116,7 +116,7 @@ namespace netcore_cqrs.api.Controllers
         /// </summary>
         /// <param name="employee">Employee model</param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
