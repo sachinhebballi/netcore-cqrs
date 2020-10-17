@@ -38,6 +38,20 @@
             <param name="employee">Employee model</param>
             <returns></returns>
         </member>
+        <member name="M:netcore_cqrs.api.Controllers.EmployeesController.UpdateEmployee(Api.Models.Models.Employee)">
+            <summary>
+            Updates the employee
+            </summary>
+            <param name="employee">Employee model</param>
+            <returns></returns>
+        </member>
+        <member name="M:netcore_cqrs.api.Controllers.EmployeesController.DeleteEmployee(System.Int32)">
+            <summary>
+            Deletes the employee
+            </summary>
+            <param name="id">Id of employee</param>
+            <returns></returns>
+        </member>
         <member name="T:netcore_cqrs.api.Examples.EmployeeExample">
             <summary>
             Swagger document example for employee model

@@ -1,4 +1,6 @@
 ﻿using Api.Application.Command.AddEmployee;
+using Api.Application.Command.DeleteEmployee;
+using Api.Application.Command.UpdateEmployee;
 using Api.Application.Query.GetEmployees;
 using Api.Models.Models;
 using MediatR;
@@ -102,6 +104,52 @@ namespace netcore_cqrs.api.Controllers
             var command = new AddEmployeeCommand
             {
                 Employee = employee
+            };
+
+            await _mediator.Send(command);
+
+            return Ok();
+        }
+
+        /// <summary>
+        /// Updates the employee
+        /// </summary>
+        /// <param name="employee">Employee model</param>
+        /// <returns></returns>
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> UpdateEmployee([FromBody] Employee employee)
+        {
+            _logger.Debug("Update new employee");
+
+            var command = new UpdateEmployeeCommand
+            {
+                Employee = employee
+            };
+
+            await _mediator.Send(command);
+
+            return Ok();
+        }
+
+        /// <summary>
+        /// Deletes the employee
+        /// </summary>
+        /// <param name="id">Id of employee</param>
+        /// <returns></returns>
+        [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> DeleteEmployee([FromBody] int id)
+        {
+            _logger.Debug("Delete employee with id", id);
+
+            var command = new DeleteEmployeeCommand
+            {
+                EmployeeId = id
             };
 
             await _mediator.Send(command);
