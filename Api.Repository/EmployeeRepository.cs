@@ -21,17 +21,27 @@ namespace Api.Repository
         public async Task AddAsync(Employee employee, CancellationToken cancellationToken)
         {
             await _context.AddAsync(employee, cancellationToken);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(cancellationToken);
         }
 
-        public Task DeleteAsync(int id, CancellationToken cancellationToken)
+        public async Task DeleteAsync(int id, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var employee = await _context.Employees.FirstOrDefaultAsync(_ => _.EmployeeId == id, cancellationToken);
+
+            if (employee == null) throw new Exception("Employee not found");
+
+            _context.Employees.Remove(employee);
+
+            await _context.SaveChangesAsync(cancellationToken);
         }
 
-        public Task<IEnumerable<Employee>> FindAsync(string q, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Employee>> SearchAsync(string q, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return await _context.Employees
+                .Include(_ => _.Address)
+                .AsNoTracking()
+                .Where(_ => _.FirstName.Contains(q) || _.LastName.Contains(q))
+                .ToListAsync(cancellationToken);
         }
 
         public async Task<Employee> GetEmployeeAsync(int id, CancellationToken cancellationToken)
@@ -45,14 +55,16 @@ namespace Api.Repository
         {
             return await _context.Employees
                 .Include(_ => _.Address)
+                .AsNoTracking()
                 .Skip(pageSize * (page - 1))
                 .Take(pageSize)
                 .ToListAsync(cancellationToken);
         }
 
-        public Task UpdateAsync(Employee employee, CancellationToken cancellationToken)
+        public async Task UpdateAsync(Employee employee, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            _context.Employees.Update(employee);
+            await _context.SaveChangesAsync(cancellationToken);
         }
     }
 }

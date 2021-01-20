@@ -13,6 +13,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
 using System.Text.Json;
+using Hellang.Middleware.ProblemDetails;
 
 namespace netcore_cqrs.api
 {
@@ -79,6 +80,7 @@ namespace netcore_cqrs.api
                     opts.JsonSerializerOptions.IgnoreNullValues = true;
                 });
 
+            services.AddProblemDetails();
 
             services.AddAutoMapper(assembly);
             services.AddMediatR(assembly);
@@ -112,6 +114,8 @@ namespace netcore_cqrs.api
             });
 
             app.UseHttpsRedirection();
+
+            app.UseProblemDetails();
 
             app.UseRouting();
 

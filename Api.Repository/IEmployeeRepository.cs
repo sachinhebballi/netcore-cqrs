@@ -11,7 +11,7 @@ namespace Api.Repository
 
         Task<Employee> GetEmployeeAsync(int id, CancellationToken cancellationToken);
 
-        Task<IEnumerable<Employee>> FindAsync(string q, CancellationToken cancellationToken);
+        Task<IEnumerable<Employee>> SearchAsync(string q, CancellationToken cancellationToken);
 
         Task AddAsync(Employee employee, CancellationToken cancellationToken);
 

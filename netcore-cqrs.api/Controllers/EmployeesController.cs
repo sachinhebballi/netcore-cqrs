@@ -139,11 +139,11 @@ namespace netcore_cqrs.api.Controllers
         /// </summary>
         /// <param name="id">Id of employee</param>
         /// <returns></returns>
-        [HttpDelete]
+        [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> DeleteEmployee([FromBody] int id)
+        public async Task<IActionResult> DeleteEmployee(int id)
         {
             _logger.Debug("Delete employee with id", id);
 
