@@ -13,7 +13,10 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
 using System.Text.Json;
+using Api.Common.Extensions.ServiceCollectionExtensions;
+using Api.Common.Models.Common;
 using Hellang.Middleware.ProblemDetails;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace netcore_cqrs.api
 {
@@ -26,47 +29,20 @@ namespace netcore_cqrs.api
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
+
+            var appSettings = new AppSettings();
+            Configuration.Bind("appSettings", appSettings);
+            services.TryAddSingleton(appSettings);
+
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
             services.AddDbContext<EmployeesContext>(options =>
             {
                 options.UseInMemoryDatabase("Employees");
-            });
-
-            services.AddSwaggerGen(c =>
-            {   
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "1.0" });
-
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                    {
-                        new OpenApiSecurityScheme
-                        {
-                            Reference = new OpenApiReference
-                            {
-                                Type = ReferenceType.SecurityScheme,
-                                Id = "Bearer"
-                            },
-                            Scheme = "oauth2",
-                            Name = "Bearer",
-                            In = ParameterLocation.Header
-                        },
-                        new[] { "readAccess", "writeAccess" }
-                    }
-                });
-                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                {
-                    Description = "Jwt authorization using bearer scheme",
-                    Name = "Authorization",
-                    In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.ApiKey,
-                    Scheme = "Bearer"
-                });
-
-                c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, @"Docs\netcore-cqrs.api.xml"));
             });
             
             var assembly = AppDomain.CurrentDomain.Load("Api.Application");
@@ -80,16 +56,15 @@ namespace netcore_cqrs.api
                     opts.JsonSerializerOptions.IgnoreNullValues = true;
                 });
 
+            services.AddSwaggerServices();
             services.AddProblemDetails();
-
             services.AddAutoMapper(assembly);
             services.AddMediatR(assembly);
+            services.RegisterRetryPolicies(Configuration);
 
             services.AddControllers();
-
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
@@ -97,7 +72,7 @@ namespace netcore_cqrs.api
                 var context = serviceScope.ServiceProvider.GetRequiredService<EmployeesContext>();
                 context.Database.EnsureCreated();
                 
-                // Enable this for non im memory providers
+                // Enable this for non in memory providers
                 //context.Database.Migrate();
             }
 
