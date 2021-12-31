@@ -14,7 +14,7 @@ namespace netcore_cqrs.api.Controllers
     /// <summary>
     /// Api controller for employees
     /// </summary>
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class EmployeesController : ControllerBase
     {
