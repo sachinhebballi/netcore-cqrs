@@ -2,6 +2,7 @@ using Api.Persistence;
 using Api.Repository;
 using AutoMapper;
 using FluentValidation.AspNetCore;
+using Hellang.Middleware.ProblemDetails;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -13,7 +14,6 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.IO;
 using System.Text.Json;
-using Hellang.Middleware.ProblemDetails;
 
 namespace netcore_cqrs.api
 {

@@ -38,10 +38,11 @@
             <param name="employee">Employee model</param>
             <returns></returns>
         </member>
-        <member name="M:netcore_cqrs.api.Controllers.EmployeesController.UpdateEmployee(Api.Models.Models.Employee)">
+        <member name="M:netcore_cqrs.api.Controllers.EmployeesController.UpdateEmployee(System.Int32,Api.Models.Models.Employee)">
             <summary>
             Updates the employee
             </summary>
+            <param name="employeeId"></param>
             <param name="employee">Employee model</param>
             <returns></returns>
         </member>
