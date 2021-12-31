@@ -14,7 +14,7 @@ namespace netcore_cqrs.api.Controllers
     /// <summary>
     /// Api controller for employees
     /// </summary>
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class EmployeesController : ControllerBase
     {
@@ -114,15 +114,18 @@ namespace netcore_cqrs.api.Controllers
         /// <summary>
         /// Updates the employee
         /// </summary>
+        /// <param name="employeeId"></param>
         /// <param name="employee">Employee model</param>
         /// <returns></returns>
-        [HttpPut]
+        [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> UpdateEmployee([FromBody] Employee employee)
+        public async Task<IActionResult> UpdateEmployee(int employeeId, [FromBody] Employee employee)
         {
             _logger.Debug("Update new employee");
+
+            employee.EmployeeId = employeeId;
 
             var command = new UpdateEmployeeCommand
             {

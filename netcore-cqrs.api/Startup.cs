@@ -1,22 +1,20 @@
+using Api.Common.Extensions.ServiceCollectionExtensions;
+using Api.Common.Models.Common;
 using Api.Persistence;
 using Api.Repository;
 using AutoMapper;
 using FluentValidation.AspNetCore;
+using Hellang.Middleware.ProblemDetails;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
-using System;
-using System.IO;
-using System.Text.Json;
-using Api.Common.Extensions.ServiceCollectionExtensions;
-using Api.Common.Models.Common;
-using Hellang.Middleware.ProblemDetails;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Hosting;
+using System;
+using System.Text.Json;
 
 namespace netcore_cqrs.api
 {
