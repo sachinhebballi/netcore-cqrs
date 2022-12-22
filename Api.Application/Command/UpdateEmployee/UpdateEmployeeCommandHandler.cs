@@ -22,7 +22,7 @@ namespace Api.Application.Command.UpdateEmployee
         {
             var employee = await _employeeRepository.GetEmployeeAsync(command.Employee.EmployeeId, cancellationToken);
 
-            if (employee == null) return null;
+            if (employee == null) throw new FluentValidation.ValidationException($"Employee not found for the id {command.Employee.EmployeeId}");
 
             employee.FirstName = command.Employee.FirstName;
             employee.LastName = command.Employee.LastName;

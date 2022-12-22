@@ -7,6 +7,8 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace netcore_cqrs.api.Controllers
@@ -43,7 +45,7 @@ namespace netcore_cqrs.api.Controllers
         /// <param name="pageSize">Page size</param>
         /// <returns>Returns the list of employees</returns>
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(List<Employee>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetEmployees(int pageNumber = 1, int pageSize = 10)
@@ -67,7 +69,7 @@ namespace netcore_cqrs.api.Controllers
         /// <param name="id">Id of the employee</param>
         /// <returns>Returns employee</returns>
         [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Employee), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetEmployee(int id)
@@ -108,7 +110,7 @@ namespace netcore_cqrs.api.Controllers
 
             await _mediator.Send(command);
 
-            return Ok();
+            return NoContent();
         }
 
         /// <summary>
@@ -134,7 +136,7 @@ namespace netcore_cqrs.api.Controllers
 
             await _mediator.Send(command);
 
-            return Ok();
+            return Ok(employee);
         }
 
         /// <summary>

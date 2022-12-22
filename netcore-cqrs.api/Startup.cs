@@ -1,8 +1,11 @@
-using Api.Common.Extensions.ServiceCollectionExtensions;
+using Api.Common.Exceptions;
+using Api.Common.Exceptions.ProblemDetails;
+using Api.Common.Extensions;
 using Api.Common.Models.Common;
 using Api.Persistence;
 using Api.Repository;
 using AutoMapper;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using Hellang.Middleware.ProblemDetails;
 using MediatR;
@@ -14,6 +17,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.Net;
 using System.Text.Json;
 
 namespace netcore_cqrs.api
@@ -42,7 +46,7 @@ namespace netcore_cqrs.api
             {
                 options.UseInMemoryDatabase("Employees");
             });
-            
+
             var assembly = AppDomain.CurrentDomain.Load("Api.Application");
 
             services
@@ -55,7 +59,7 @@ namespace netcore_cqrs.api
                 });
 
             services.AddSwaggerServices();
-            services.AddProblemDetails();
+            services.AddCustomProblemDetails();
             services.AddAutoMapper(assembly);
             services.AddMediatR(assembly);
             services.RegisterRetryPolicies(Configuration);
@@ -69,7 +73,7 @@ namespace netcore_cqrs.api
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<EmployeesContext>();
                 context.Database.EnsureCreated();
-                
+
                 // Enable this for non in memory providers
                 //context.Database.Migrate();
             }

@@ -3,7 +3,7 @@ using System.IO;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
-namespace Api.Common.Extensions.ServiceCollectionExtensions
+namespace Api.Common.Extensions
 {
     public static class SwaggerExtensions
     {

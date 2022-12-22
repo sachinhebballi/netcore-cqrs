@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Polly.Extensions.Http;
 
-namespace Api.Common.Extensions.ServiceCollectionExtensions
+namespace Api.Common.Extensions
 {
     public static class RegisterPoliciesExtensions
     {
