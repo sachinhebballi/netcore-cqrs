@@ -55,7 +55,7 @@ namespace netcore_cqrs.api
                 .AddJsonOptions(opts =>
                 {
                     opts.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-                    opts.JsonSerializerOptions.IgnoreNullValues = true;
+                    opts.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
                 });
 
             services.AddSwaggerServices();
