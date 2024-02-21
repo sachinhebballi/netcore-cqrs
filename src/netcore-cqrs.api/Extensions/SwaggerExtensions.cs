@@ -3,11 +3,11 @@ using System.IO;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
-namespace Api.Common.Extensions
+namespace netcore_cqrs.api.Extensions
 {
     public static class SwaggerExtensions
     {
-        public static void AddSwaggerServices(this IServiceCollection services)
+        public static IServiceCollection AddSwaggerServices(this IServiceCollection services)
         {
             services.AddSwaggerGen(c =>
             {
@@ -41,6 +41,8 @@ namespace Api.Common.Extensions
 
                 c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, @"Docs\netcore-cqrs.api.xml"));
             });
+
+            return services;
         }
     }
 }

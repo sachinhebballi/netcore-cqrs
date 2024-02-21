@@ -20,4 +20,8 @@
     <Folder Include="Exceptions\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Api.Repository\Api.Repository.csproj" />
+  </ItemGroup>
+
 </Project>

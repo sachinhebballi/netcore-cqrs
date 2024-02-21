@@ -3,15 +3,15 @@ using Api.Application.Command.DeleteEmployee;
 using Api.Application.Command.UpdateEmployee;
 using Api.Application.Query.GetEmployees;
 using Api.Models.Models;
+using Asp.Versioning;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace netcore_cqrs.api.Controllers
+namespace netcore_cqrs.api.Controllers.v1
 {
     /// <summary>
     /// Api controller for employees
@@ -45,6 +45,7 @@ namespace netcore_cqrs.api.Controllers
         /// <param name="pageSize">Page size</param>
         /// <returns>Returns the list of employees</returns>
         [HttpGet]
+        [MapToApiVersion(1.0)]
         [ProducesResponseType(typeof(List<Employee>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]

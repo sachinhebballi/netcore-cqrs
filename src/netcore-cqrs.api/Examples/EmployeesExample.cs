@@ -1,6 +1,5 @@
 ﻿using Api.Models.Models;
 using Swashbuckle.AspNetCore.Filters;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace netcore_cqrs.api.Examples

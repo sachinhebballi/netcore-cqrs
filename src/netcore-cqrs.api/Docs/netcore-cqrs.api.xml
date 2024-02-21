@@ -4,19 +4,19 @@
         <name>netcore-cqrs.api</name>
     </assembly>
     <members>
-        <member name="T:netcore_cqrs.api.Controllers.EmployeesController">
+        <member name="T:netcore_cqrs.api.Controllers.v1.EmployeesController">
             <summary>
             Api controller for employees
             </summary>
         </member>
-        <member name="M:netcore_cqrs.api.Controllers.EmployeesController.#ctor(MediatR.IMediator,Serilog.ILogger)">
+        <member name="M:netcore_cqrs.api.Controllers.v1.EmployeesController.#ctor(MediatR.IMediator,Serilog.ILogger)">
             <summary>
-            Initializes a new instance of <see cref="T:netcore_cqrs.api.Controllers.EmployeesController"/> class
+            Initializes a new instance of <see cref="T:netcore_cqrs.api.Controllers.v1.EmployeesController"/> class
             </summary>
             <param name="mediator">Mediator</param>
             <param name="logger">Serilog logger instance</param>
         </member>
-        <member name="M:netcore_cqrs.api.Controllers.EmployeesController.GetEmployees(System.Int32,System.Int32)">
+        <member name="M:netcore_cqrs.api.Controllers.v1.EmployeesController.GetEmployees(System.Int32,System.Int32)">
             <summary>
             Gets all the employees
             </summary>
@@ -24,21 +24,21 @@
             <param name="pageSize">Page size</param>
             <returns>Returns the list of employees</returns>
         </member>
-        <member name="M:netcore_cqrs.api.Controllers.EmployeesController.GetEmployee(System.Int32)">
+        <member name="M:netcore_cqrs.api.Controllers.v1.EmployeesController.GetEmployee(System.Int32)">
             <summary>
             Gets the employee by id
             </summary>
             <param name="id">Id of the employee</param>
             <returns>Returns employee</returns>
         </member>
-        <member name="M:netcore_cqrs.api.Controllers.EmployeesController.AddEmployee(Api.Models.Models.Employee)">
+        <member name="M:netcore_cqrs.api.Controllers.v1.EmployeesController.AddEmployee(Api.Models.Models.Employee)">
             <summary>
             Adds a new employee
             </summary>
             <param name="employee">Employee model</param>
             <returns></returns>
         </member>
-        <member name="M:netcore_cqrs.api.Controllers.EmployeesController.UpdateEmployee(System.Int32,Api.Models.Models.Employee)">
+        <member name="M:netcore_cqrs.api.Controllers.v1.EmployeesController.UpdateEmployee(System.Int32,Api.Models.Models.Employee)">
             <summary>
             Updates the employee
             </summary>
@@ -46,7 +46,7 @@
             <param name="employee">Employee model</param>
             <returns></returns>
         </member>
-        <member name="M:netcore_cqrs.api.Controllers.EmployeesController.DeleteEmployee(System.Int32)">
+        <member name="M:netcore_cqrs.api.Controllers.v1.EmployeesController.DeleteEmployee(System.Int32)">
             <summary>
             Deletes the employee
             </summary>

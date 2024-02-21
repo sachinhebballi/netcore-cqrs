@@ -1,11 +1,5 @@
-using Api.Common.Exceptions;
-using Api.Common.Exceptions.ProblemDetails;
-using Api.Common.Extensions;
 using Api.Common.Models.Common;
 using Api.Persistence;
-using Api.Repository;
-using AutoMapper;
-using FluentValidation;
 using FluentValidation.AspNetCore;
 using Hellang.Middleware.ProblemDetails;
 using MediatR;
@@ -16,9 +10,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
+using netcore_cqrs.api.Extensions;
 using System;
-using System.Net;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace netcore_cqrs.api
 {
@@ -40,31 +35,29 @@ namespace netcore_cqrs.api
             Configuration.Bind("appSettings", appSettings);
             services.TryAddSingleton(appSettings);
 
-            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-
             services.AddDbContext<EmployeesContext>(options =>
             {
                 options.UseInMemoryDatabase("Employees");
             });
 
-            var assembly = AppDomain.CurrentDomain.Load("Api.Application");
-
             services
                 .AddMvc()
-                .AddFluentValidation(v => v.RegisterValidatorsFromAssembly(assembly))
                 .AddJsonOptions(opts =>
                 {
                     opts.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-                    opts.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
+                    opts.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
                 });
 
-            services.AddSwaggerServices();
-            services.AddCustomProblemDetails();
-            services.AddAutoMapper(assembly);
-            services.AddMediatR(assembly);
-            services.RegisterRetryPolicies(Configuration);
-
             services.AddControllers();
+
+            var assembly = AppDomain.CurrentDomain.Load("Api.Application");
+            services.AddFluentValidationAutoValidation()
+                    .AddAppServices()
+                    .AddSwaggerServices()
+                    .AddCustomProblemDetails()
+                    .AddAutoMapper(assembly)
+                    .AddMediatR(assembly)
+                    .RegisterRetryPolicies(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

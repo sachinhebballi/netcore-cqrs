@@ -1,5 +1,6 @@
 ﻿using Api.Common.Exceptions;
 using Api.Common.Exceptions.ProblemDetails;
+using Api.Repository;
 using FluentValidation;
 using Hellang.Middleware.ProblemDetails;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,11 +8,30 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Net;
 
-namespace Api.Common.Extensions
+namespace netcore_cqrs.api.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static void AddCustomProblemDetails(this IServiceCollection services)
+
+        public static IServiceCollection AddAppServices(this IServiceCollection services)
+        {
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+
+            return services;
+        }
+
+        public static IServiceCollection AddApiVersioning(this IServiceCollection services)
+        {
+            services.AddApiVersioning(options =>
+            {
+                options.ReportApiVersions = true;
+                options.AssumeDefaultVersionWhenUnspecified = false;
+            });
+
+            return services;
+        }
+
+        public static IServiceCollection AddCustomProblemDetails(this IServiceCollection services)
         {
             services.AddProblemDetails(d =>
             {
@@ -32,6 +52,8 @@ namespace Api.Common.Extensions
                     return env.IsDevelopment();
                 };
             });
+
+            return services;
         }
     }
 }

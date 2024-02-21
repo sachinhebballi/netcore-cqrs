@@ -1,5 +1,4 @@
-﻿using Api.Common.Exceptions;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 
 namespace Api.Common.Exceptions.ProblemDetails
 {

@@ -13,6 +13,8 @@ namespace Api.Models.Domain
         public string LastName { get; set; }
 
         public int Age { get; set; }
+        
+        public DateTime HireDate { get; set; }
 
         public virtual Address Address { get; set; }
     }

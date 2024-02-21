@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30320.27
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "netcore-cqrs.api", "netcore-cqrs.api\netcore-cqrs.api.csproj", "{F607E37B-ED88-476D-865E-DA6A5E5E3AC0}"
 EndProject
@@ -19,9 +19,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.Persistence", "Api.Pers
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6A0D87AC-A0A2-4DF1-BE9D-DBC8236AE280}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "netcore-cqrs.api.unittests", "netcore-cqrs.api.unittests\netcore-cqrs.api.unittests.csproj", "{9D801785-C1FA-4569-81BD-67F8253F0146}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "netcore-cqrs.api.UnitTests", "netcore-cqrs.api.unittests\netcore-cqrs.api.UnitTests.csproj", "{9D801785-C1FA-4569-81BD-67F8253F0146}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.Common", "Api.Common\Api.Common.csproj", "{76D616B3-49A9-4750-9086-97614896AEB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "netcore-cqrs.api.IntegrationTests", "netcore-cqrs.api.IntegrationTests\netcore-cqrs.api.IntegrationTests.csproj", "{C3A41F13-E33A-410C-8906-25CA695337EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{76D616B3-49A9-4750-9086-97614896AEB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76D616B3-49A9-4750-9086-97614896AEB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76D616B3-49A9-4750-9086-97614896AEB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3A41F13-E33A-410C-8906-25CA695337EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3A41F13-E33A-410C-8906-25CA695337EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3A41F13-E33A-410C-8906-25CA695337EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3A41F13-E33A-410C-8906-25CA695337EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,6 +74,7 @@ Global
 		{1B412B46-975F-4EB3-95C5-92D724B2283F} = {EACCC7E4-C774-4098-ADAA-BB5864777E90}
 		{9D801785-C1FA-4569-81BD-67F8253F0146} = {6A0D87AC-A0A2-4DF1-BE9D-DBC8236AE280}
 		{76D616B3-49A9-4750-9086-97614896AEB2} = {06B113A0-686F-459C-A5AB-71885AE89358}
+		{C3A41F13-E33A-410C-8906-25CA695337EC} = {6A0D87AC-A0A2-4DF1-BE9D-DBC8236AE280}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E63469C0-C29A-418E-A973-2E9C35A9701E}
